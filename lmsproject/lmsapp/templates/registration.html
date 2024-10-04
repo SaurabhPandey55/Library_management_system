@@ -1,0 +1,198 @@
+{% extends "parent.html" %}
+{%block main %}
+<script>
+    function validate()
+    {
+        var rollno=document.getElementById("rollno");
+        var name=document.getElementById("name");
+        var fname=document.getElementById("fname");
+        var mname=document.getElementById("mname");
+        var contactno=document.getElementById("contactno");
+        var emailaddress=document.getElementById("emailaddress");
+        var password=document.getElementById("password");
+        var confirmpassword=document.getElementById("confirmpassword");
+        var emailexp=/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+        if(rollno.value=="" || rollno.value==null)
+        {
+            alert('enter roll no.');
+            rollno.focus();
+        }
+        else if(isNaN(rollno.value))
+        {
+            alert("please enter number only");
+            rollno.focus();
+        }
+        else if(name.value=="" ||name.value==null)
+        {
+            alert('enter name');
+            name.focus();
+        } 
+        else if( fname.value=="" || fname.value==null)
+        {
+            alert('enter father name');
+            fname.focus();
+        }
+        else if( mname.value=="" || mname.value==null)
+        {
+            alert('enter mother name');
+            mname.focus();
+        }
+        else if(contactno.value=="" || contactno.value==null)
+        {
+            alert('enter contact no');
+            contactno.focus();
+        }
+        else if(isNaN(contactno.value))
+        {
+            alert("please enter numbers only");
+            contactno.focus();
+        }
+        else if(contactno.value.length!=10)
+        {
+            alert('enter only 10 digit');
+            contactno.focus();
+        }
+        else if(emailaddress.value==null || emailaddress.value=="")
+        {
+            alert('enter emailaddress');
+            emailaddress.focus();
+        }
+        else if(!emailexp.test(emailaddress.value))
+        {
+            alert('enter valid email');
+            emailaddress.focus();
+        }
+        else if(password.value=="" || password.value==null)
+        {
+            alert('enter valid password');
+            password.focus();
+        }
+        else if(password.value.length<8)
+        {
+            alert('please enter at least 8 characters');
+            password.focus();
+        }
+        else if(confirmpassword.value==null||confirmpassword.valiue=="")
+        {
+            alert('please enter confirm password');
+            confirmpassword.focus();
+        }
+        else if(confirmpassword.value!=password.value)
+        {
+            alert('confirm pass word not match');
+            confirmpassword.focus();
+        }
+        else
+        {
+            document.getElementById("frmregistration").submit();
+        }
+
+    }
+</script>
+{% if messages %}
+   {% for message in messages %}   
+   <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>{{message}}</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div> 
+   {% endfor%}  
+{% endif %}
+
+ <h1 style="text-align:center;"> Student Registration Form</h1>
+ <form class="form-group" method="post" id="frmregistration"  onsubmit="event.preventDefault(); validate();"action="{% url 'lmsapp:registration'%}">
+    {% csrf_token %}
+    <table class="table table-bordered" style="width:80%;margin:auto;">
+        <tr>
+            <td>
+                Enter roll no.
+            </td>
+            <td><input type="number" name="rollno" class="form-control" id="rollno"/>
+            </td>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td> <input type="text" name="name" class="form-control" id="name"/></td>
+        </tr>
+        <tr>
+            <td>Father's Name</td>
+            <td><input type="text" name="fname" class="form-control" id="fname"/></td>
+        </tr>
+        <tr>
+            <td>Mother's Name</td>
+            <td><input type="text" name="mname" class="form-control" id="mname"/></td>
+        </tr>
+        <tr>
+            <td>Gender</td>
+            <td ><input type="radio" name="gender" value="male" class="form-check-input"/>Male
+            <input type="radio" name="gender" value="female" class="form-check-input"/> Female</td>
+        </tr>
+        <tr>
+            <td>Address</td>
+            <td>
+              <textarea name="address" class="form-control"></textarea>
+            </td>  
+        </tr>
+        <tr>
+            <td>Select Program</td>
+             <td> 
+                <select name="program" class="form-control">
+                    <option selected>--Select program--</option>
+                    {%for p in program %}
+                    <option value="{{p.program}}">{{p.program}}</option>
+                    {% endfor %}
+                </select>
+          </td>
+
+        </tr>
+        <tr>
+            <td>
+              Enter Branch
+            </td>
+            <td>
+                <select name="branch" class="form-control">
+                    <option selected>--Select Branch--</option>
+                    {% for b in branch %}
+                    <option value={{b.branch}}>{{b.branch}}</option>
+                    {% endfor %}
+                    
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Enter year</td>
+            <td>
+                <select name="year" class="form-control">
+                    <option selected>--year--</option>
+                    {%for y in year %}
+                    <option value="{{y.year}}">{{y.year}}</option>
+                    {%endfor%}
+
+                </select>
+            
+            </td>
+        </tr>
+        <tr>
+            <td>Enter Contact No.</td>
+            <td><input type="number" name="contactno" class="form-control" id="contactno"/></td>
+        </tr>
+        <tr>
+            <td> Enter Email Address</td>
+            <td><input type="text" name="emailaddress" class="form-control"id="emailaddress"/></td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td><input type="password" name="password" class="form-control" id="password"/></td>
+        </tr>
+        <tr>
+            <td>Confirm Password</td>
+            <td><input type="password" name="confirmpassword" class="form-control" id="confirmpassword"/></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td><button type="submit" class="btn btn-success">Submit</button></td>
+        </tr>
+
+    </table>
+ </form>
+{%endblock main%}

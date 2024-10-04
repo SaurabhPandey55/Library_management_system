@@ -1,0 +1,38 @@
+{% extends "adminparent.html" %}
+{% block body %}
+    <div class="row">
+        <h1 style="text-align:center;">Retun book List</h1>   
+
+        <div class="col-sm-12" style="overflow-x:scroll">
+            <table class="table table-bordered text-light">
+                <tr>
+                    <th>ISSUE ID
+                    </th>
+                    <th> Book Id</th>
+                    <th>ISBN NO</th>
+                    
+                    <th> Bookname</th>
+                    <th> Author name</th>
+                    <th> Roll no</th>
+                    <th> name</th>
+                    <th> Issue Date</th>
+                    <th> Due Date</th>
+                </tr>
+                {%for b in book%}
+                <tr>
+                    <td>{{b.id}}</td>
+                    <td>{{b.bookid}}</td>
+                    <td>{{b.isbnno}}</td>
+                    <td>{{b.bookname}}</td>
+                    <td>{{b.authorname}}</td>
+                    <td>{{b.rollno}}</td>
+                    <td>{{b.name}}</td>
+                    <td>{{b.issuedate}}</td>
+                    <td>{{b.duedate}}</td>
+                </tr>
+                {%endfor%}
+            </table>
+              
+        </div>
+    </div>
+{% endblock body %}

@@ -1,0 +1,108 @@
+{% extends "parent.html" %}
+{%block main %}
+
+<div class="col-sm-6" style="background-color:aliceblue;min-height:600px;">
+
+
+<script> 
+    function validate()
+    {
+        
+        var name=document.getElementById("name");
+        var emailaddress=document.getElementById("emailaddress");
+        var contactno=document.getElementById("contactno");
+        var emailexp=/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+        if (name.value==null || name.value=="")
+        {
+            alert("enter name")
+            name.focus();
+        }
+        else if  (contactno.value==null || contactno.value=="")
+        {
+            alert("please enter contact no");
+            contactno.focus();
+        }
+        else if(isNaN(contactno.value))
+        {
+            alert("please enter numbers only");
+            contactno.focus();
+        }
+        else if(contactno.value.length!=10)
+        {
+            alert("enter 10 digit no.");
+            contactno.focus();
+        }
+        else if(emailaddress==null || emailaddress=="")
+        {
+            alert("enter valid email address")
+            emailaddress.focus();
+        }
+        else if(!emailexp.test(emailaddress.value))
+        {
+            alert("please enter valid email");
+            emailaddress.focus();
+
+        }
+        else
+        {
+            document.getElementById("frmcontactus").submit();
+        }
+    }
+</script>
+{% if messages %}
+   {% for message in messages %}   
+   <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>{{message}}</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div> 
+   {% endfor%}  
+{% endif %}
+
+ <h1 style="text-align:center;"> Enquiry  Form</h1>
+ <form class="form-group" method="post"id="frmcontactus" onsubmit="event.preventDefault(); validate();" action="{% url 'lmsapp:contactus' %}" >
+    {% csrf_token %}
+    <table class="table" style="width:80%;margin:auto;">
+        <tr>
+            <td>
+                Enter name
+            </td>
+            <td><input type="text" name="name" class="form-control" id="name"/></td>
+        </tr>
+        <tr>
+            <td>Select Gender</td>
+            <td><input type="radio" name="gender" value="male" class="form-check-input"/>Male
+            <input type="radio" name="gender" value="female" class="form-check-input"/>Female</td>
+        </tr>
+        <tr>
+            <td>ADDRESS</td>
+            <td>
+                <textarea  class="form-control" name="address"> </textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>Enter contact No.</td>
+            <td> <input type="text" name="contactno" class="form-control" id="contactno"/> </td>
+        </tr>
+        <tr>
+            <td>Email Address </td>
+            <td> <input type="text" name="emailaddress" class="formm-control" id="emailaddress"/> </td>
+        </tr>
+        <tr>
+            <td> Enquiry Text</td>
+            <td>
+              <textarea name="enquirytext" class="form-control">
+              </textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td> <button type="submit" class="btn btn-success">Submit</button></td>
+        </tr>
+
+    </table>
+
+ </form>
+ 
+</div>
+{%endblock main%}

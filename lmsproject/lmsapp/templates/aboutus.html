@@ -1,0 +1,29 @@
+{% extends "parent.html" %}
+{% load static%}
+{%block main %}
+<div class="row m-0 p-0">
+    
+       
+        <div class="col-sm-4" style="background-color:white;min-height:500px;">
+            <button class="btn btn-danger" style="margin:55px 0px 0px 80px; font-size:30px;">-</button>
+            <img src={% static '#'%}/ style="height:400px;min-width:330px; margin:15px 0px 0px 70px; border:2px solid red; position:relative;border-radius:5px;">
+            <div class="block" style="min-height:200px; width:250px;background-color:white;margin:25px 0px 0px 105px;border:1px solid white;position:inherit;box-shadow:inset 10px 20px 30px grey ">
+                <h1 style="text-align:center;color:red;">-</h1>
+                <span><h3 style="text-align:center;">-</h3></span></br>
+                <a href="#" class="btn btn-danger" style="min-width:250px;">Know More</a>
+            </div>
+            <div class="space" style="height:100px; width:250px;background-color:white;"></div>
+        </div>
+        <div class="col-sm-4"style="background-color:white;min-height:500px;">
+            <button class="btn btn-danger" style="margin:55px 0px 0px 10px; font-size:30px;">-</button>
+            <img src={% static '#'%}/ style="height:400px;min-width:330px; margin:15px 0px 0px 30px; border:2px solid red; position:relative;border-radius:5px;">
+            <div class="block" style="min-height:200px; width:300px;background-color:white;margin:25px 0px 0px 55px;border:1px solid white;position:inherit;box-shadow:inset 10px 20px 30px grey ">
+                <h1 style="text-align:center;color:red;">-</h1>
+                <span><h3 style="text-align:center;">Prof</h3></span></br>
+                <a href="#" class="btn btn-danger" style="min-width:300px; margin-top:35px;">Know More</a>
+            </div>
+            <div class="space" style="height:100px; width:250px;background-color:white;"></div>
+
+
+        </div>
+{%endblock main%}
